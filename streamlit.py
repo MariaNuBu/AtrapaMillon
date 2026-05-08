@@ -494,6 +494,7 @@ if user == "Profesor":
     idx = state["pregunta_idx"]
     if idx < len(preguntas):
         p = preguntas[idx]
+        st.write(p['q'])
         st.success(f"**Correct Answer:** {p['ops'][p['correct']]}")
     else:
         st.success("All questions completed!")

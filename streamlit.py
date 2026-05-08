@@ -62,8 +62,8 @@ if user == "Profesor":
         state["fase"] = "espera"
         st.rerun()
     
-    if st.button("Reset"):
-        state = get_game_state()
+    if st.button("Reset Game"):
+        get_game_state.clear()
         st.rerun()
 
     time.sleep(1) # Auto-refresh para el ranking
@@ -103,17 +103,32 @@ elif user in state["jugadores"]:
         apuestas = [0,0,0,0]
         cols_ops = st.columns(4)
         
+        def set_bet(trap_idx, fraction):
+            total = state["jugadores"][user]["dinero"]
+            other_bets = sum(st.session_state.get(f"q{idx}u{user}o{j}", 0) for j in range(4) if j != trap_idx)
+            left = max(0, total - other_bets)
+            st.session_state[f"q{idx}u{user}o{trap_idx}"] = int(round(left * fraction / 10000.0) * 10000)
+
         for i in range(4):
-            # Deshabilitar si se abren trampillas o ya está listo
-            disabled = state["trapdoor_open"] or state["jugadores"][user]["listo"]
-            apuestas[i] = cols_ops[i].number_input(
-                p["ops"][i], 
-                min_value=0, 
-                max_value=state["jugadores"][user]["dinero"], 
-                step=10000, 
-                key=f"q{idx}u{user}o{i}",
-                disabled=disabled
-            )
+            with cols_ops[i]:
+                # Deshabilitar si se abren trampillas o ya está listo
+                disabled = state["trapdoor_open"] or state["jugadores"][user]["listo"]
+                apuestas[i] = st.number_input(
+                    p["ops"][i], 
+                    min_value=0, 
+                    max_value=state["jugadores"][user]["dinero"], 
+                    step=10000, 
+                    key=f"q{idx}u{user}o{i}",
+                    disabled=disabled
+                )
+
+                if not disabled:
+                    b1, b2 = st.columns(2)
+                    b1.button("All", key=f"b_all_{idx}_{i}", on_click=set_bet, args=(i, 1.0), use_container_width=True)
+                    b2.button("1/2", key=f"b_half_{idx}_{i}", on_click=set_bet, args=(i, 0.5), use_container_width=True)
+                    b3, b4 = st.columns(2)
+                    b3.button("1/4", key=f"b_14_{idx}_{i}", on_click=set_bet, args=(i, 0.25), use_container_width=True)
+                    b4.button("3/4", key=f"b_34_{idx}_{i}", on_click=set_bet, args=(i, 0.75), use_container_width=True)
 
         # BOTÓN PARA CONFIRMAR
         if not state["jugadores"][user]["listo"] and state["fase"] == "apostando":

@@ -21,7 +21,7 @@ def get_game_state():
 state = get_game_state()
 
 # --- 2. PREGUNTAS (Resumidas para el código, añade las tuyas) ---
-questions = [
+preguntas = [
   {
     "q": "What is a primary characteristic of data networks regarding packet handling?",
     "ops": [
@@ -389,6 +389,106 @@ questions = [
       "B) Sending an INVITE simultaneously to multiple known IP addresses for a single user",
       "C) Changing the codec dynamically mid-call",
       "D) Dropping low-priority packets during congestion"
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Given the command: access-list 10 permit 192.168.0.0 0.0.255.255",
+    "ops": [
+      "A) It permits all traffic destined to the 192.168.0.0 network.",
+      "B) It denies traffic from the 192.168.0.0 network.",
+      "C) It permits all traffic originating from the 192.168.0.0/16 network.",
+      "D) It applies an extended ACL to the interface."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Given the command: access-list 120 permit icmp any any echo-reply",
+    "ops": [
+      "A) It creates a standard ACL to allow all pings.",
+      "B) It permits incoming ICMP echo-reply messages from any source to any destination.",
+      "C) It drops all unreachable ICMP messages.",
+      "D) It forces the router to reply to all ICMP messages."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Given the commands: line vty 0 4 followed by access-class 2 in",
+    "ops": [
+      "A) It applies ACL 2 to restrict remote administration access (via Telnet or SSH) to the router's virtual ports.",
+      "B) It limits the maximum number of standard ACLs to 2.",
+      "C) It blocks all data traffic entering the router's physical interfaces.",
+      "D) It permits 2 users to bypass security rules."
+    ],
+    "correct": 0
+  },
+  {
+    "q": "Given the command: ip access-group 1 out applied in interface configuration mode",
+    "ops": [
+      "A) It deletes ACL 1 from the configured interface.",
+      "B) It creates a new ACL named \"out\".",
+      "C) It applies extended ACL 1 to the incoming flow of traffic.",
+      "D) It associates standard ACL 1 to filter the outgoing flow of traffic on that interface."
+    ],
+    "correct": 3
+  },
+  {
+    "q": "Given the command: access-list 105 permit tcp host 192.168.1.10 any eq www time-range MyHours",
+    "ops": [
+      "A) It allows the host to synchronize its clock via a web server.",
+      "B) It permits TCP web traffic from host 192.168.1.10 to any destination only during the times defined in the \"MyHours\" time-range.",
+      "C) It restricts the router's uptime to the MyHours range.",
+      "D) It creates a dynamic ACL that expires after a set amount of hours."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Given the command: permit tcp 192.168.1.0 0.0.0.255 any reflect TCP_TRAFFIC",
+    "ops": [
+      "A) It forces the router to loop the traffic back to the source.",
+      "B) It reflects malicious traffic back to an attacker.",
+      "C) It examines outgoing TCP connections and generates temporary rules to accept the returning incoming traffic.",
+      "D) It creates a lock-and-key dynamic ACL named TCP_TRAFFIC."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Given the command: access-list 100 dynamic router-telnet timeout 15 permit ip 192.168.1.0 0.0.0.255 192.168.2.0 0.0.0.255",
+    "ops": [
+      "A) It adds a permanent extended rule allowing traffic between the two subnets.",
+      "B) It creates a lock-and-key ACL that blocks traffic until a user authenticates in the router, then adds a temporary rule for 15 minutes.",
+      "C) It dynamically changes the router's IP address every 15 minutes.",
+      "D) It allows reflexive routing of Telnet packets for 15 users."
+    ],
+    "correct": 1
+  },
+  {
+    "q": "Given the command: show access-list",
+    "ops": [
+      "A) It displays only the interfaces that have ACLs applied to them.",
+      "B) It configures a new standard ACL directly from the terminal.",
+      "C) It displays the defined ACLs along with the number of coincidences (matches) for each rule.",
+      "D) It adds a comment to an existing ACL."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Given the commands: tunnel source Serial0 and tunnel destination 192.168.0.2",
+    "ops": [
+      "A) It encrypts all traffic leaving the Serial0 interface using IPSec.",
+      "B) It establishes a level 2 PPP tunnel.",
+      "C) It configures a virtual tunnel interface by indicating the local physical interface and the IP address of the remote end.",
+      "D) It applies a reflexive ACL to the serial interface."
+    ],
+    "correct": 2
+  },
+  {
+    "q": "Given the operational description: \"It protects all the original Datagram fields by encapsulating them, allowing communication between intermediate systems to implement VPNs.\"",
+    "ops": [
+      "A) Transport mode",
+      "B) Tunnel mode",
+      "C) Authentication Header (AH)",
+      "D) Standard Access List"
     ],
     "correct": 1
   }

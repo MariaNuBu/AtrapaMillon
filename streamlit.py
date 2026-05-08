@@ -13,7 +13,7 @@ def get_game_state():
         "trapdoor_open_time": None,
         "jugadores": {
             "Iker":  {"dinero": 1000000, "apuesta": [0,0,0,0], "listo": False},
-            "Roman": {"dinero": 1000000, "apuesta": [0,0,0,0], "listo": False},
+            "Roman": {"dinero": 1500000, "apuesta": [0,0,0,0], "listo": False},
             "Henry": {"dinero": 1000000, "apuesta": [0,0,0,0], "listo": False},
         }
     }
@@ -22,36 +22,36 @@ state = get_game_state()
 
 # --- 2. PREGUNTAS (Resumidas para el código, añade las tuyas) ---
 preguntas = [
-  {
-    "q": "What is a primary characteristic of data networks regarding packet handling?",
-    "ops": [
-      "A) Constant and minimum delay",
-      "B) Bandwidth reserved for each communication",
-      "C) Packages compete for available bandwidth using FIFO management",
-      "D) Switching circuits and dedicated links"
-    ],
-    "correct": 2
-  },
-  {
-    "q": "What is the main challenge for voice and video traffic when transported over converged IP networks?",
-    "ops": [
-      "A) They require variable delay to function correctly",
-      "B) They are very sensitive to delay and bandwidth variations",
-      "C) They require TCP overload for reliable delivery",
-      "D) They cannot use packet switching under any circumstances"
-    ],
-    "correct": 1
-  },
-  {
-    "q": "Why is the TCP service generally unsuitable for real-time interactive multimedia flows?",
-    "ops": [
-      "A) It reduces flow and introduces delay due to its congestion control",
-      "B) It provides no guarantees for ordered delivery",
-      "C) It is too lightweight and lacks security",
-      "D) It cannot transport voice packets over IP networks"
-    ],
-    "correct": 0
-  },
+#  {
+#    "q": "What is a primary characteristic of data networks regarding packet handling?",
+#    "ops": [
+#      "A) Constant and minimum delay",
+#      "B) Bandwidth reserved for each communication",
+#      "C) Packages compete for available bandwidth using FIFO management",
+#      "D) Switching circuits and dedicated links"
+#    ],
+#    "correct": 2
+#  },
+#  {
+#    "q": "What is the main challenge for voice and video traffic when transported over converged IP networks?",
+#    "ops": [
+#      "A) They require variable delay to function correctly",
+#      "B) They are very sensitive to delay and bandwidth variations",
+#      "C) They require TCP overload for reliable delivery",
+#      "D) They cannot use packet switching under any circumstances"
+#    ],
+#    "correct": 1
+#  },
+#  {
+#    "q": "Why is the TCP service generally unsuitable for real-time interactive multimedia flows?",
+#    "ops": [
+#      "A) It reduces flow and introduces delay due to its congestion control",
+#      "B) It provides no guarantees for ordered delivery",
+#      "C) It is too lightweight and lacks security",
+#      "D) It cannot transport voice packets over IP networks"
+#    ],
+#    "correct": 0
+#  },
   {
     "q": "Which of the following best describes the requirements for interactive real-time audio/video flows (e.g., telephony)?",
     "ops": [

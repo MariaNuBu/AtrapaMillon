@@ -48,7 +48,6 @@ if user == "Profesor":
     if c1.button("🚀 Start question (60s)"):
         state["fase"] = "apostando"
         state["limite_tiempo"] = datetime.now() + timedelta(seconds=60)
-        state["trapdoor_open"] = False
         for n in state["jugadores"]: state["jugadores"][n]["listo"] = False
         st.rerun()
 
@@ -156,6 +155,10 @@ elif user in state["jugadores"]:
             else:
                 st.error(f"¡BOOM! The money has fallen. The correct one was: {p['ops'][correcta]}")
                 state["jugadores"][user]["dinero"] = 0
+            
+            time.sleep(5)
+            state['trapdoor_open'] = False
+            st.rerun()
 
     # Auto-refresh cada segundo para ver el timer y las órdenes del prof
     time.sleep(1)

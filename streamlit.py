@@ -486,8 +486,17 @@ if user == "Profesor":
     cols = st.columns(3)
     for i, (nom, datos) in enumerate(state["jugadores"].items()):
         cols[i].metric(label=nom, value=f"${datos['dinero']:,}", delta=None)
-        if datos["listo"]: cols[i].success("✅ Apuesta fijada")
-        else: cols[i].warning("⏳ Pensando...")
+        if datos["listo"]: cols[i].success("✅ Bet fixed")
+        else: cols[i].warning("⏳ Thinking...")
+
+    st.divider()
+
+    idx = state["pregunta_idx"]
+    if idx < len(preguntas):
+        p = preguntas[idx]
+        st.success(f"**Correct Answer:** {p['ops'][p['correct']]}")
+    else:
+        st.success("All questions completed!")
 
     st.divider()
 
@@ -606,13 +615,7 @@ elif user in state["jugadores"]:
             
             if state["fase"] == "resultados":
                 state["jugadores"][user]["dinero"] = dinero_salvado
-            
-            if state.get("trapdoor_open_time") and datetime.now() < state["trapdoor_open_time"] + timedelta(seconds=5):
-                if dinero_salvado > 0:
-                    st.success(f"¡THE TRAPDOOR {p['ops'][correcta]} STAYED CLOSED! You saved ${dinero_salvado:,}")
-                else:
-                    st.error(f"¡BOOM! The money has fallen. The correct one was: {p['ops'][correcta]}")
-   
+
     # Auto-refresh cada segundo para ver el timer y las órdenes del prof
     time.sleep(1)
     st.rerun()

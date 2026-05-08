@@ -413,16 +413,6 @@ preguntas = [
     "correct": 1
   },
   {
-    "q": "Given the commands: line vty 0 4 followed by access-class 2 in",
-    "ops": [
-      "A) It applies ACL 2 to restrict remote administration access (via Telnet or SSH) to the router's virtual ports.",
-      "B) It limits the maximum number of standard ACLs to 2.",
-      "C) It blocks all data traffic entering the router's physical interfaces.",
-      "D) It permits 2 users to bypass security rules."
-    ],
-    "correct": 0
-  },
-  {
     "q": "Given the command: ip access-group 1 out applied in interface configuration mode",
     "ops": [
       "A) It deletes ACL 1 from the configured interface.",
@@ -469,16 +459,6 @@ preguntas = [
       "B) It configures a new standard ACL directly from the terminal.",
       "C) It displays the defined ACLs along with the number of coincidences (matches) for each rule.",
       "D) It adds a comment to an existing ACL."
-    ],
-    "correct": 2
-  },
-  {
-    "q": "Given the commands: tunnel source Serial0 and tunnel destination 192.168.0.2",
-    "ops": [
-      "A) It encrypts all traffic leaving the Serial0 interface using IPSec.",
-      "B) It establishes a level 2 PPP tunnel.",
-      "C) It configures a virtual tunnel interface by indicating the local physical interface and the IP address of the remote end.",
-      "D) It applies a reflexive ACL to the serial interface."
     ],
     "correct": 2
   },

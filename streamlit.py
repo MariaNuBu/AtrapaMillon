@@ -12,9 +12,9 @@ def get_game_state():
         "trapdoor_open": False,
         "trapdoor_open_time": None,
         "jugadores": {
-            "Iker":  {"dinero": 1000000, "apuesta": [0,0,0,0], "listo": False},
-            "Roman": {"dinero": 1500000, "apuesta": [0,0,0,0], "listo": False},
-            "Henry": {"dinero": 1000000, "apuesta": [0,0,0,0], "listo": False},
+            "Iker":  {"dinero": 500000, "apuesta": [0,0,0,0], "listo": False},
+            "Roman": {"dinero": 2000000, "apuesta": [0,0,0,0], "listo": False},
+            "Henry": {"dinero": 1100000, "apuesta": [0,0,0,0], "listo": False},
         }
     }
 
@@ -52,16 +52,16 @@ preguntas = [
 #    ],
 #    "correct": 0
 #  },
-  {
-    "q": "Which of the following best describes the requirements for interactive real-time audio/video flows (e.g., telephony)?",
-    "ops": [
-      "A) The receiver can control the sender with RTSP",
-      "B) It allows for pause and rewind with medium delay requirements",
-      "C) Sending speed equals reproduction speed with very strict delay requirements (<150 ms)",
-      "D) It relies primarily on TCP retransmissions to handle heavy losses"
-    ],
-    "correct": 2
-  },
+#  {
+#    "q": "Which of the following best describes the requirements for interactive real-time audio/video flows (e.g., telephony)?",
+#    "ops": [
+#      "A) The receiver can control the sender with RTSP",
+#      "B) It allows for pause and rewind with medium delay requirements",
+#      "C) Sending speed equals reproduction speed with very strict delay requirements (<150 ms)",
+#      "D) It relies primarily on TCP retransmissions to handle heavy losses"
+#    ],
+#    "correct": 2
+#  },
   {
     "q": "According to the Nyquist theorem, what is the minimum sampling frequency required for an audio signal?",
     "ops": [

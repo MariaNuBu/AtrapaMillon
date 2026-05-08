@@ -11,9 +11,9 @@ def get_game_state():
         "limite_tiempo": None,
         "trapdoor_open": False,
         "jugadores": {
-            "Alumno 1": {"dinero": 1000000, "apuesta": [0,0,0,0], "listo": False},
-            "Alumno 2": {"dinero": 1000000, "apuesta": [0,0,0,0], "listo": False},
-            "Alumno 3": {"dinero": 1000000, "apuesta": [0,0,0,0], "listo": False},
+            "Iker":  {"dinero": 1000000, "apuesta": [0,0,0,0], "listo": False},
+            "Roman": {"dinero": 1000000, "apuesta": [0,0,0,0], "listo": False},
+            "Henry": {"dinero": 1000000, "apuesta": [0,0,0,0], "listo": False},
         }
     }
 
@@ -45,27 +45,27 @@ if user == "Profesor":
 
     # CONTROLES DE FLUJO
     c1, c2, c3 = st.columns(3)
-    if c1.button("🚀 Lanzar Pregunta (Iniciar 60s)"):
+    if c1.button("🚀 Start question (60s)"):
         state["fase"] = "apostando"
         state["limite_tiempo"] = datetime.now() + timedelta(seconds=60)
         state["trapdoor_open"] = False
         for n in state["jugadores"]: state["jugadores"][n]["listo"] = False
         st.rerun()
 
-    if c2.button("💥 ABRIR TRAMPILLAS (Corte manual)"):
+    if c2.button("💥 Open trapdoors (Manual cut)"):
         state["trapdoor_open"] = True
         state["fase"] = "resultados"
         st.rerun()
 
-    if c3.button("➡️ Siguiente Pregunta"):
+    if c3.button("➡️ Next question"):
         state["pregunta_idx"] += 1
         state["fase"] = "espera"
         st.rerun()
-
-    # Log de apuestas para tu control
-    st.write("### Apuestas actuales:")
-    st.json(state["jugadores"])
     
+    if st.button("Reset"):
+        state = get_game_state()
+        st.rerun()
+
     time.sleep(1) # Auto-refresh para el ranking
     st.rerun()
 
@@ -81,7 +81,7 @@ elif user in state["jugadores"]:
     # MOSTRAR PREGUNTA
     idx = state["pregunta_idx"]
     if idx >= len(preguntas):
-        st.success("¡Has sobrevivido al test!")
+        st.success("¡You survived!")
         st.stop()
 
     p = preguntas[idx]
@@ -92,58 +92,59 @@ elif user in state["jugadores"]:
     
     if state["fase"] == "apostando":
         restante = int((state["limite_tiempo"] - datetime.now()).total_seconds())
-        h2.header(f"⏱️ Tiempo: {max(0, restante)}s")
+        h2.header(f"⏱️ Time: {max(0, restante)}s")
     else:
-        h2.header("⏱️ TIEMPO AGOTADO" if state["fase"] == "resultados" else "Esperando al profesor...")
+        h2.header("⏱️ TIME EXPIRED" if state["fase"] == "resultados" else "Waiting for the professor...")
 
-    st.info(f"**PREGUNTA {idx+1}:** {p['q']}")
+    if state["fase"] != "espera":
+        st.info(f"**QUESTION {idx+1}:** {p['q']}")
 
-    # INTERFAZ DE APUESTA
-    apuestas = [0,0,0,0]
-    cols_ops = st.columns(4)
-    
-    for i in range(4):
-        # Deshabilitar si se abren trampillas o ya está listo
-        disabled = state["trapdoor_open"] or state["jugadores"][user]["listo"]
-        apuestas[i] = cols_ops[i].number_input(
-            p["ops"][i], 
-            min_value=0, 
-            max_value=state["jugadores"][user]["dinero"], 
-            step=10000, 
-            key=f"q{idx}u{user}o{i}",
-            disabled=disabled
-        )
-
-    # BOTÓN PARA CONFIRMAR
-    if not state["jugadores"][user]["listo"] and state["fase"] == "apostando":
-        if st.button("CONFIRMAR APUESTA"):
-            if sum(apuestas) != state["jugadores"][user]["dinero"]:
-                st.error("Debes apostar todo tu capital.")
-            elif apuestas.count(0) < 1:
-                st.error("Debes dejar al menos una trampilla vacía.")
-            else:
-                state["jugadores"][user]["apuesta"] = apuestas
-                state["jugadores"][user]["listo"] = True
-                st.rerun()
-
-    # RESOLUCIÓN AUTOMÁTICA (Cuando el profesor abre trampillas)
-    if state["trapdoor_open"]:
-        st.divider()
-        correcta = p["correct"]
-        dinero_salvado = state["jugadores"][user]["apuesta"][correcta]
+        # INTERFAZ DE APUESTA
+        apuestas = [0,0,0,0]
+        cols_ops = st.columns(4)
         
-        if dinero_salvado > 0:
-            st.success(f"¡LA TRAMPILLA {p['ops'][correcta]} SE MANTUVO CERRADA! Has salvado ${dinero_salvado:,}")
-            # Solo actualizamos el capital una vez al abrir
-            if state["fase"] == "resultados":
-                state["jugadores"][user]["dinero"] = dinero_salvado
-        else:
-            st.error(f"¡BOOM! El dinero ha caído. La correcta era: {p['ops'][correcta]}")
-            state["jugadores"][user]["dinero"] = 0
+        for i in range(4):
+            # Deshabilitar si se abren trampillas o ya está listo
+            disabled = state["trapdoor_open"] or state["jugadores"][user]["listo"]
+            apuestas[i] = cols_ops[i].number_input(
+                p["ops"][i], 
+                min_value=0, 
+                max_value=state["jugadores"][user]["dinero"], 
+                step=10000, 
+                key=f"q{idx}u{user}o{i}",
+                disabled=disabled
+            )
+
+        # BOTÓN PARA CONFIRMAR
+        if not state["jugadores"][user]["listo"] and state["fase"] == "apostando":
+            if st.button("CONFIRMAR APUESTA"):
+                if sum(apuestas) != state["jugadores"][user]["dinero"]:
+                    st.error("Debes apostar todo tu capital.")
+                elif apuestas.count(0) < 1:
+                    st.error("Debes dejar al menos una trampilla vacía.")
+                else:
+                    state["jugadores"][user]["apuesta"] = apuestas
+                    state["jugadores"][user]["listo"] = True
+                    st.rerun()
+
+        # RESOLUCIÓN AUTOMÁTICA (Cuando el profesor abre trampillas)
+        if state["trapdoor_open"]:
+            st.divider()
+            correcta = p["correct"]
+            dinero_salvado = state["jugadores"][user]["apuesta"][correcta]
+            
+            if dinero_salvado > 0:
+                st.success(f"¡THE TRAPDOOR {p['ops'][correcta]} STAYED CLOSED! You saved ${dinero_salvado:,}")
+                # Solo actualizamos el capital una vez al abrir
+                if state["fase"] == "resultados":
+                    state["jugadores"][user]["dinero"] = dinero_salvado
+            else:
+                st.error(f"¡BOOM! The money has fallen. The correct one was: {p['ops'][correcta]}")
+                state["jugadores"][user]["dinero"] = 0
 
     # Auto-refresh cada segundo para ver el timer y las órdenes del prof
     time.sleep(1)
     st.rerun()
 
 else:
-    st.warning("Por favor, usa un enlace válido con ?user=Alumno 1, Alumno 2, Alumno 3 o Profesor")
+    st.warning("Por favor, usa un enlace válido con ?user=Iker, Roman, Henry")

@@ -582,11 +582,11 @@ elif user in state["jugadores"]:
 
         # BOTÓN PARA CONFIRMAR
         if not state["jugadores"][user]["listo"] and state["fase"] == "apostando":
-            if st.button("CONFIRMAR APUESTA"):
+            if st.button("CONFIRM ANSWER"):
                 if sum(apuestas) != state["jugadores"][user]["dinero"]:
-                    st.error("Debes apostar todo tu capital.")
+                    st.error("You must bet all your capital.")
                 elif apuestas.count(0) < 1:
-                    st.error("Debes dejar al menos una trampilla vacía.")
+                    st.error("You must leave at least one trapdoor empty.")
                 else:
                     state["jugadores"][user]["apuesta"] = apuestas
                     state["jugadores"][user]["listo"] = True

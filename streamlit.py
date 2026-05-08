@@ -10,6 +10,7 @@ def get_game_state():
         "pregunta_idx": 0,
         "limite_tiempo": None,
         "trapdoor_open": False,
+        "trapdoor_open_time": None,
         "jugadores": {
             "Iker":  {"dinero": 1000000, "apuesta": [0,0,0,0], "listo": False},
             "Roman": {"dinero": 1000000, "apuesta": [0,0,0,0], "listo": False},
@@ -48,12 +49,14 @@ if user == "Profesor":
     if c1.button("🚀 Start question (60s)"):
         state["fase"] = "apostando"
         state["limite_tiempo"] = datetime.now() + timedelta(seconds=60)
+        state["trapdoor_open"] = False
         for n in state["jugadores"]: state["jugadores"][n]["listo"] = False
         st.rerun()
 
     if c2.button("💥 Open trapdoors (Manual cut)"):
         state["trapdoor_open"] = True
         state["fase"] = "resultados"
+        state["trapdoor_open_time"] = datetime.now()
         st.rerun()
 
     if c3.button("➡️ Next question"):
@@ -76,6 +79,7 @@ elif user in state["jugadores"]:
     if state["fase"] == "apostando" and datetime.now() > state["limite_tiempo"]:
         state["trapdoor_open"] = True
         state["fase"] = "resultados"
+        state["trapdoor_open_time"] = datetime.now()
 
     # MOSTRAR PREGUNTA
     idx = state["pregunta_idx"]
@@ -141,25 +145,27 @@ elif user in state["jugadores"]:
                     state["jugadores"][user]["listo"] = True
                     st.rerun()
 
+        # AUTO-SAVE BETS SI EL TIEMPO EXPIRÓ O EL PROFESOR CORTÓ
+        if state["trapdoor_open"] and not state["jugadores"][user]["listo"]:
+            current_bets = [st.session_state.get(f"q{idx}u{user}o{k}", 0) for k in range(4)]
+            state["jugadores"][user]["apuesta"] = current_bets
+            state["jugadores"][user]["listo"] = True
+
         # RESOLUCIÓN AUTOMÁTICA (Cuando el profesor abre trampillas)
         if state["trapdoor_open"]:
             st.divider()
             correcta = p["correct"]
             dinero_salvado = state["jugadores"][user]["apuesta"][correcta]
             
-            if dinero_salvado > 0:
-                st.success(f"¡THE TRAPDOOR {p['ops'][correcta]} STAYED CLOSED! You saved ${dinero_salvado:,}")
-                # Solo actualizamos el capital una vez al abrir
-                if state["fase"] == "resultados":
-                    state["jugadores"][user]["dinero"] = dinero_salvado
-            else:
-                st.error(f"¡BOOM! The money has fallen. The correct one was: {p['ops'][correcta]}")
-                state["jugadores"][user]["dinero"] = 0
+            if state["fase"] == "resultados":
+                state["jugadores"][user]["dinero"] = dinero_salvado
             
-            time.sleep(5)
-            state['trapdoor_open'] = False
-            st.rerun()
-
+            if state.get("trapdoor_open_time") and datetime.now() < state["trapdoor_open_time"] + timedelta(seconds=5):
+                if dinero_salvado > 0:
+                    st.success(f"¡THE TRAPDOOR {p['ops'][correcta]} STAYED CLOSED! You saved ${dinero_salvado:,}")
+                else:
+                    st.error(f"¡BOOM! The money has fallen. The correct one was: {p['ops'][correcta]}")
+   
     # Auto-refresh cada segundo para ver el timer y las órdenes del prof
     time.sleep(1)
     st.rerun()

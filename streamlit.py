@@ -12,9 +12,9 @@ def get_game_state():
         "trapdoor_open": False,
         "trapdoor_open_time": None,
         "jugadores": {
-            "Iker":  {"dinero": 500000, "apuesta": [0,0,0,0], "listo": False},
-            "Roman": {"dinero": 2340000, "apuesta": [0,0,0,0], "listo": False},
-            "Henry": {"dinero": 2000000, "apuesta": [0,0,0,0], "listo": False},
+            "Iker":  {"dinero": 1190000, "apuesta": [0,0,0,0], "listo": False},
+            "Roman": {"dinero": 1000000, "apuesta": [0,0,0,0], "listo": False},
+            "Henry": {"dinero": 3000000, "apuesta": [0,0,0,0], "listo": False},
         }
     }
 
@@ -132,46 +132,46 @@ preguntas = [
 #    ],
 #    "correct": 2
 #  },
-  {
-    "q": "Given the command: access-list 100 dynamic router-telnet timeout 15 permit ip 192.168.1.0 0.0.0.255 192.168.2.0 0.0.0.255",
-    "ops": [
-      "A) It adds a permanent extended rule allowing traffic between the two subnets.",
-      "B) It creates a lock-and-key ACL that blocks traffic until a user authenticates in the router, then adds a temporary rule for 15 minutes.",
-      "C) It dynamically changes the router's IP address every 15 minutes.",
-      "D) It allows reflexive routing of Telnet packets for 15 users."
-    ],
-    "correct": 1
-  },
-  {
-    "q": "Given the command: show access-list",
-    "ops": [
-      "A) It displays only the interfaces that have ACLs applied to them.",
-      "B) It configures a new standard ACL directly from the terminal.",
-      "C) It displays the defined ACLs along with the number of coincidences (matches) for each rule.",
-      "D) It adds a comment to an existing ACL."
-    ],
-    "correct": 2
-  },
-  {
-    "q": "Given the operational description: \"It protects all the original Datagram fields by encapsulating them, allowing communication between intermediate systems to implement VPNs.\"",
-    "ops": [
-      "A) Transport mode",
-      "B) Tunnel mode",
-      "C) Authentication Header (AH)",
-      "D) Standard Access List"
-    ],
-    "correct": 1
-  },
-  {
-    "q": "What is the purpose of Forward Error Correction (FEC) in voice transmission?",
-    "ops": [
-      "A) It requests the sender to retransmit lost packets immediately",
-      "B) It interleaves samples to separate them in time",
-      "C) It interpolates the medium between previous and posterior samples",
-      "D) It sends redundant information to rebuild lost samples"
-    ],
-    "correct": 3
-  },
+#  {
+#    "q": "Given the command: access-list 100 dynamic router-telnet timeout 15 permit ip 192.168.1.0 0.0.0.255 192.168.2.0 0.0.0.255",
+#    "ops": [
+#      "A) It adds a permanent extended rule allowing traffic between the two subnets.",
+#      "B) It creates a lock-and-key ACL that blocks traffic until a user authenticates in the router, then adds a temporary rule for 15 minutes.",
+#      "C) It dynamically changes the router's IP address every 15 minutes.",
+#      "D) It allows reflexive routing of Telnet packets for 15 users."
+#    ],
+#    "correct": 1
+#  },
+#  {
+#    "q": "Given the command: show access-list",
+#    "ops": [
+#      "A) It displays only the interfaces that have ACLs applied to them.",
+#      "B) It configures a new standard ACL directly from the terminal.",
+#      "C) It displays the defined ACLs along with the number of coincidences (matches) for each rule.",
+#      "D) It adds a comment to an existing ACL."
+#    ],
+#    "correct": 2
+#  },
+#  {
+#    "q": "Given the operational description: \"It protects all the original Datagram fields by encapsulating them, allowing communication between intermediate systems to implement VPNs.\"",
+#    "ops": [
+#      "A) Transport mode",
+#      "B) Tunnel mode",
+#      "C) Authentication Header (AH)",
+#      "D) Standard Access List"
+#    ],
+#    "correct": 1
+#  },
+#  {
+#    "q": "What is the purpose of Forward Error Correction (FEC) in voice transmission?",
+#    "ops": [
+#      "A) It requests the sender to retransmit lost packets immediately",
+#      "B) It interleaves samples to separate them in time",
+#      "C) It interpolates the medium between previous and posterior samples",
+#      "D) It sends redundant information to rebuild lost samples"
+#    ],
+#    "correct": 3
+#  },
   {
     "q": "What is the primary effect of using interleaved samples for loss recovery?",
     "ops": [

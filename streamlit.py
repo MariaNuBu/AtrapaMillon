@@ -12,9 +12,9 @@ def get_game_state():
         "trapdoor_open": False,
         "trapdoor_open_time": None,
         "jugadores": {
-            "Iker":  {"dinero": 1000000, "apuesta": [0,0,0,0], "listo": False},
+            "Iker":  {"dinero": 500000, "apuesta": [0,0,0,0], "listo": False},
             "Roman": {"dinero": 2340000, "apuesta": [0,0,0,0], "listo": False},
-            "Henry": {"dinero": 2100000, "apuesta": [0,0,0,0], "listo": False},
+            "Henry": {"dinero": 2000000, "apuesta": [0,0,0,0], "listo": False},
         }
     }
 
@@ -82,56 +82,56 @@ preguntas = [
 #    ],
 #    "correct": 1
 #  },
-  {
-    "q": "Given the command: access-list 10 permit 192.168.0.0 0.0.255.255",
-    "ops": [
-      "A) It permits all traffic destined to the 192.168.0.0 network.",
-      "B) It denies traffic from the 192.168.0.0 network.",
-      "C) It permits all traffic originating from the 192.168.0.0/16 network.",
-      "D) It applies an extended ACL to the interface."
-    ],
-    "correct": 2
-  },
-  {
-    "q": "Given the command: access-list 120 permit icmp any any echo-reply",
-    "ops": [
-      "A) It creates a standard ACL to allow all pings.",
-      "B) It permits incoming ICMP echo-reply messages from any source to any destination.",
-      "C) It drops all unreachable ICMP messages.",
-      "D) It forces the router to reply to all ICMP messages."
-    ],
-    "correct": 1
-  },
-  {
-    "q": "Given the command: ip access-group 1 out applied in interface configuration mode",
-    "ops": [
-      "A) It deletes ACL 1 from the configured interface.",
-      "B) It creates a new ACL named \"out\".",
-      "C) It applies extended ACL 1 to the incoming flow of traffic.",
-      "D) It associates standard ACL 1 to filter the outgoing flow of traffic on that interface."
-    ],
-    "correct": 3
-  },
-  {
-    "q": "Given the command: access-list 105 permit tcp host 192.168.1.10 any eq www time-range MyHours",
-    "ops": [
-      "A) It allows the host to synchronize its clock via a web server.",
-      "B) It permits TCP web traffic from host 192.168.1.10 to any destination only during the times defined in the \"MyHours\" time-range.",
-      "C) It restricts the router's uptime to the MyHours range.",
-      "D) It creates a dynamic ACL that expires after a set amount of hours."
-    ],
-    "correct": 1
-  },
-  {
-    "q": "Given the command: permit tcp 192.168.1.0 0.0.0.255 any reflect TCP_TRAFFIC",
-    "ops": [
-      "A) It forces the router to loop the traffic back to the source.",
-      "B) It reflects malicious traffic back to an attacker.",
-      "C) It examines outgoing TCP connections and generates temporary rules to accept the returning incoming traffic.",
-      "D) It creates a lock-and-key dynamic ACL named TCP_TRAFFIC."
-    ],
-    "correct": 2
-  },
+#  {
+#    "q": "Given the command: access-list 10 permit 192.168.0.0 0.0.255.255",
+#    "ops": [
+#      "A) It permits all traffic destined to the 192.168.0.0 network.",
+#      "B) It denies traffic from the 192.168.0.0 network.",
+#      "C) It permits all traffic originating from the 192.168.0.0/16 network.",
+#      "D) It applies an extended ACL to the interface."
+#    ],
+#    "correct": 2
+#  },
+#  {
+#    "q": "Given the command: access-list 120 permit icmp any any echo-reply",
+#    "ops": [
+#      "A) It creates a standard ACL to allow all pings.",
+#      "B) It permits incoming ICMP echo-reply messages from any source to any destination.",
+#      "C) It drops all unreachable ICMP messages.",
+#      "D) It forces the router to reply to all ICMP messages."
+#    ],
+#    "correct": 1
+#  },
+#  {
+#    "q": "Given the command: ip access-group 1 out applied in interface configuration mode",
+#    "ops": [
+#      "A) It deletes ACL 1 from the configured interface.",
+#      "B) It creates a new ACL named \"out\".",
+#      "C) It applies extended ACL 1 to the incoming flow of traffic.",
+#      "D) It associates standard ACL 1 to filter the outgoing flow of traffic on that interface."
+#    ],
+#    "correct": 3
+#  },
+#  {
+#    "q": "Given the command: access-list 105 permit tcp host 192.168.1.10 any eq www time-range MyHours",
+#    "ops": [
+#      "A) It allows the host to synchronize its clock via a web server.",
+#      "B) It permits TCP web traffic from host 192.168.1.10 to any destination only during the times defined in the \"MyHours\" time-range.",
+#      "C) It restricts the router's uptime to the MyHours range.",
+#      "D) It creates a dynamic ACL that expires after a set amount of hours."
+#    ],
+#    "correct": 1
+#  },
+#  {
+#    "q": "Given the command: permit tcp 192.168.1.0 0.0.0.255 any reflect TCP_TRAFFIC",
+#    "ops": [
+#      "A) It forces the router to loop the traffic back to the source.",
+#      "B) It reflects malicious traffic back to an attacker.",
+#      "C) It examines outgoing TCP connections and generates temporary rules to accept the returning incoming traffic.",
+#      "D) It creates a lock-and-key dynamic ACL named TCP_TRAFFIC."
+#    ],
+#    "correct": 2
+#  },
   {
     "q": "Given the command: access-list 100 dynamic router-telnet timeout 15 permit ip 192.168.1.0 0.0.0.255 192.168.2.0 0.0.0.255",
     "ops": [

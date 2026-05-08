@@ -391,7 +391,7 @@ questions = [
       "D) Dropping low-priority packets during congestion"
     ],
     "correct": 1
-  },
+  }
 ]
 
 # --- 3. IDENTIFICACIÓN POR URL ---
